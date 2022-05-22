@@ -17,10 +17,39 @@ fn main() {
     //get the first value from index == 1, as index 0 is not useful for us
     let first_value = cli_args.nth(1).unwrap();
 
+    //parse to float
+    let first_number = first_value.parse::<f32>().unwrap();
+
+
     //Now the iterator as advanced forward, and the next valid values
     // is at index == 0, so we will unwrap index 0 
     let operator = cli_args.nth(0).unwrap();
 
+    //parse to char
+    let operator_char = operator.chars().next().unwrap();
+
+    
     //Again getting the data from index == 0
     let second_value = cli_args.nth(0).unwrap();
+    
+    // parse to float
+    let second_number = second_value.parse::<f32>().unwrap();
+
+
+
+
+    let result : f32 = compute(operator_char, first_number, second_number);
+
+    println!("{:?}" , output(first_number, operator_char, second_number, result));
+
+}
+
+fn compute(operator : char, first_value : f32, second_value : f32) -> f32{
+    match operator{
+        '+' => first_value + second_value,
+        '-' => first_value - second_value,
+        '/' => first_value / second_value,
+        '*'|'x'|'X' => first_value * second_value,
+        _ => 0.0
+    }
 }
